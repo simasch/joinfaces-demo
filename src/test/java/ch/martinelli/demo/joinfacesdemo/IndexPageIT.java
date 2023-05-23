@@ -9,13 +9,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class IndexPageIT extends AbstractPageIT {
 
     @Test
-    public void check_title_and_heading() {
+    public void login() {
+        webDriver.navigate().to("http://localhost:%d/index.faces".formatted(port));
+
+        LoginPage loginPage = initElements(LoginPage.class);
+        assertThat(webDriver.getTitle()).isEqualTo("Login");
+
+        loginPage.login("user", "secret");
+
         IndexPage indexPage = initElements(IndexPage.class);
         indexPage.navigateTo();
 
         assertThat(indexPage.getTitle()).isEqualTo("Joinfaces Example");
-
-        assertThat(indexPage.getHeading().getText()).isEqualTo("JSF People Management");
+        assertThat(indexPage.getHeading().getText()).isEqualTo("Hello, user");
     }
 
 }

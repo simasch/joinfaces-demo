@@ -3,6 +3,10 @@ package ch.martinelli.demo.joinfacesdemo;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class IndexPage extends AbstractPageComponent {
 
@@ -24,5 +28,10 @@ public class IndexPage extends AbstractPageComponent {
 
     public WebElement getHeading() {
         return heading;
+    }
+
+    public IndexPage waitLoad() {
+        new WebDriverWait(webDriver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOf(heading));
+        return this;
     }
 }

@@ -16,11 +16,11 @@ public abstract class AbstractPageComponent {
     public abstract String getLocation();
 
     public void navigateTo() {
-        this.webDriver.navigate().to(this.prefix + "/" + getLocation());
+        webDriver.navigate().to(this.prefix + "/" + getLocation());
     }
 
     public <T extends AbstractPageComponent> T initElements(Class<T> classx) {
-        T result = PageFactory.initElements(this.webDriver, classx);
+        T result = PageFactory.initElements(webDriver, classx);
         result.setPrefix(this.prefix);
         return result;
     }

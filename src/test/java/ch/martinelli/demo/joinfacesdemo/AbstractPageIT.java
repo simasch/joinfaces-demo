@@ -12,13 +12,9 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 public class AbstractPageIT {
 
     @LocalServerPort
-    private long port;
+    protected long port;
 
-    private static WebDriver webDriver;
-
-    private static int countFinish = 0;
-
-    private static final int NUMBER_OF_SUBCLASSES = 8;
+    protected static WebDriver webDriver;
 
     @BeforeAll
     public static void init() {
@@ -28,16 +24,13 @@ public class AbstractPageIT {
     private static WebDriver getChromeDriver() {
         WebDriverManager.getInstance(ChromeDriver.class).setup();
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--headless", "--window-size=1920,1080", "--ignore-certificate-errors", "--remote-allow-origins=*", "--disable-dev-shm-usage", "--no-sandbox");
+        chromeOptions.addArguments("--window-size=1920,1080", "--ignore-certificate-errors", "--remote-allow-origins=*", "--disable-dev-shm-usage", "--no-sandbox");
         return new ChromeDriver(chromeOptions);
     }
 
     @AfterAll
     public static void finish() {
-        countFinish++;
-        if (countFinish == NUMBER_OF_SUBCLASSES) {
-            webDriver.close();
-        }
+        webDriver.close();
     }
 
     protected <T extends AbstractPageComponent> T initElements(Class<T> classx) {
@@ -47,7 +40,7 @@ public class AbstractPageIT {
     }
 
     private String getPrefix() {
-        return "http://localhost:" + this.port;
+        return "http://localhost:" + port;
     }
 
 }
