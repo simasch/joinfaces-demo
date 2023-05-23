@@ -11,7 +11,7 @@ import java.util.List;
 @ViewScoped
 public class PersonBean {
 
-    public String title() {
+    public String heading() {
         return "JSF People Management";
     }
 
