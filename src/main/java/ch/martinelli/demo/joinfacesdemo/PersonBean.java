@@ -20,12 +20,9 @@ public class PersonBean {
         return List.of(new Person("Simon", "Martinelli"), new Person("John", "Doe"));
     }
 
-    public void addMessage(FacesMessage.Severity severity, String summary, String detail) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(severity, summary, detail));
-    }
-
     public void showInfo() {
-        addMessage(FacesMessage.SEVERITY_INFO, "Info Message", "Message Content");
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "Info Message", "Message Content"));
     }
 
 }
